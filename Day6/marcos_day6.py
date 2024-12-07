@@ -24,7 +24,7 @@ def solve(thearr, extra_obstacle=None):
     current_space = start_coord
     new_space = current_space
     travelled.add(start_coord)
-    max_iteration = 1e5
+    max_iteration = 1e4
     i = 0
     while (0 <= new_space[0] < max_y) and (0 <= new_space[1] < max_x):
         i += 1
@@ -39,7 +39,10 @@ def solve(thearr, extra_obstacle=None):
         else:
             moves.rotate(-1)
         # print('rotating')
-    return len(travelled) - 1, i
+    return travelled, len(travelled) - 1
+
+
+travelled, solution = solve(arr)
 
 
 def part2(arr):
@@ -47,7 +50,10 @@ def part2(arr):
     max_y, max_x = arr.shape
     for x in tqdm(range(max_x)):
         for y in range(max_y):
-            out = solve(arr, extra_obstacle=(y, x))
+            if (y, x) not in travelled:
+                out = solve(arr, extra_obstacle=(y, x))
+            else:
+                continue
             if out[0] == 'loop':
                 #   print('loop found')
                 bad_count += 1
