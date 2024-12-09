@@ -39,7 +39,7 @@ def check_coords(coord_pair, theshape):
 
 def find_all_antinodes(coord_list):
     out = []
-    for coord1, coord2 in itertools.permutations(coord_list, 2):
+    for coord1, coord2 in itertools.combinations(coord_list, 2):
         out.extend(find_antinodes(coord1, coord2))
     return out
 
@@ -66,7 +66,7 @@ def find_antinodes2(coord1, coord2):
 
 def find_all_antinodes2(coord_list):
     out = []
-    for coord1, coord2 in itertools.permutations(coord_list, 2):
+    for coord1, coord2 in itertools.combinations(coord_list, 2):
         out.extend(find_antinodes2(coord1, coord2))
     return out
 
