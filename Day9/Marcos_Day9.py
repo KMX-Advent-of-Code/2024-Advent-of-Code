@@ -65,7 +65,7 @@ class FreeSpace:
         return f'Free Space {self.size}'
 
     def __eq__(self, other):
-        """I define this such that .index in tnhe deque will find the first free space block equal to or bigger than the size I need"""
+        """I define this such that .index in the deque will find the first free space block equal to or bigger than the size I need"""
         return isinstance(other, FreeSpace) and (other.size <= self.size)
 
 
@@ -97,7 +97,7 @@ def optimize_deque2(s, right_deque):
                 first_empty_index, last_block
             )  # i think insert is reasonably fast for deque but not sure about .index
             s.append(FreeSpace(last_block.size))
-        except ValueError:
+        except ValueError:  # this triggers if it can't find an empty block big enough with .index so just put this in the right deque
             right_deque.appendleft(last_block)
     else:
         right_deque.appendleft(last_block)
@@ -111,6 +111,7 @@ def solve2(s):
     ans = 0
     i = 0
     for block in right_deque:
+        # slightly tedious to get the checksum
         for k in range(block.size):
             ans += i * block._id
             i += 1
