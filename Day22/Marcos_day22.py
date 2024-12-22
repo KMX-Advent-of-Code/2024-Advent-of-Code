@@ -53,12 +53,11 @@ def solve_part2(ints):
             changes.append(delta)
             out.append(new_last_digit)
             old_digit = new_last_digit
-            if len(changes) == 4:
-                tchange = tuple(changes)
+            tchange = tuple(changes)
 
-                if tchange not in used_tuples:
-                    bananas[tchange] += new_last_digit
-                    used_tuples.add(tchange)
+            if tchange not in used_tuples:
+                bananas[tchange] += new_last_digit
+                used_tuples.add(tchange)
 
     for x in tqdm(ints):
         _ = more_sequences2(x, 2000)
