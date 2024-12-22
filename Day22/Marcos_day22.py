@@ -33,7 +33,7 @@ sum([more_sequences(x, 2000) for x in myints])
 
 
 def last_digit(x):
-    return x - ((x // 10) * 10)
+    return x % 10  # less dumb
 
 
 def solve_part2(ints):
@@ -49,6 +49,7 @@ def solve_part2(ints):
             new_num = sequence(new_num)
             new_last_digit = last_digit(new_num)
             delta = new_last_digit - old_digit
+            # keep a running list of the last 4 deltas using a deque with maxlen = 4
             changes.append(delta)
             out.append(new_last_digit)
             old_digit = new_last_digit
